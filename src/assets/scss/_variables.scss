@@ -1,0 +1,26 @@
+$backgroud-color: var(#f5f5f5);
+$text-color: #333;
+$light-text-color: #737373;
+$line-text-color: #767676;
+$break-line-color: #e4e4e4;
+$white: #fff;
+$black: #000;
+$yellow: #ffce3d;
+$gray: #f5f5f5;
+$error-color: #ff424f;
+$primary-color: #ed4033;
+$primary-color-light: #ef6036;
+
+$primary-font: var("Inter", sans-serif);
+
+$header-height: 12rem;
+$navbar-height: 3.4rem;
+
+$breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+);

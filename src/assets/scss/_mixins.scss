@@ -1,0 +1,125 @@
+// media breakpoint down/up for responsive
+@mixin media-breakpoint($breakpoint, $direction: down) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        $breakpoint-value: map-get($breakpoints, $breakpoint);
+        @if $direction == up {
+            @media (min-widht: $breakpoint-value) {
+                @content;
+            }
+        } @else if $direction == down {
+            @media (max-width: $breakpoint-value) {
+                @content;
+            }
+        }
+    }
+}
+
+// media breakpoint between two size for responsive
+@mixin media-breakpoint-between($lower, $upper) {
+    @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+        $lower-breakpoint: map-get($breakpoints, $lower);
+        $upper-breakpoint: map-get($breakpoints, $upper);
+
+        @media (min-width: $lower-breakpoint) and (max-width: $upper-breakpoint) {
+            @content;
+        }
+    }
+    else {
+        @media (min-width: $lower) and (max-width: $upper) {
+            @content;
+        }
+    }
+}
+
+//transition
+@mixin transition($what: all, $time: 0.2s, $how: ease-in-out) {
+    transition: $what $time $how;
+    -webkit-transition: $what $time $how;
+    -moz-transition: $what $time $how;
+    -ms-transition: $what $time $how;
+    -o-transition: $what $time $how;
+}
+
+//transform-origin
+@mixin transformOrigin($origin) {
+    transform-origin: $origin;
+    -webkit-transform-origin: $origin;
+    -moz-transform-origin: $origin;
+    -ms-transform-origin: $origin;
+    -o-transform-origin: $origin;
+}
+
+// transform
+@mixin transform($transforms) {
+    transform: $transforms;
+    -webkit-transform: $transforms;
+    -moz-transform: $transforms;
+    -ms-transform: $transforms;
+    -o-transform: $transforms;
+}
+
+// animation
+@mixin animation($str) {
+    -webkit-animation: #{$str};
+    -moz-animation: #{$str};
+    -ms-animation: #{$str};
+    -o-animation: #{$str};
+    animation: #{$str};
+}
+
+// border radius
+@mixin borderRadius($radius: 0) {
+    border-radius: $radius;
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    -o-border-radius: $radius;
+}
+
+//placeholder
+@mixin placeholder {
+    &::-webkit-input-placeholder {
+        @content;
+    }
+    &::-moz-input-placeholder {
+        @content;
+    }
+    &::-ms-input-input-placeholder {
+        @content;
+    }
+}
+
+// mixin position
+@mixin position($position, $top: null, $right: null, $bottom: null, $left: null) {
+    position: $position;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+//absolute
+@mixin absolute($args...) {
+    @include position(absolute, $args...);
+}
+
+//relative
+@mixin relative($args...) {
+    @include position(relative, $args...);
+}
+
+//fixed
+@mixin fixed($args...) {
+    @include position(fixed, $args...);
+}
+
+//sticky
+@mixin sticky($args...) {
+    @include position(sticky, $args...);
+}
+
+// absolute center
+@mixin absoluteCenter {
+    @include absolute(50%, null, null, 50%);
+    @include transform(translate(-50%, -50%));
+}

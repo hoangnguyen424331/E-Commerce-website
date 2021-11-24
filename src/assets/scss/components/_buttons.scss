@@ -1,0 +1,27 @@
+.button {
+    @include borderRadius(2px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3.5rem;
+    color: $white;
+    background-color: var($primary-color);
+    padding: 1px 15px;
+    text-transform: capitalize;
+    border: none;
+    user-select: none;
+
+    &:hover {
+        background-color: rgba(var($primary-color), 0.8);
+    }
+
+    &:disabled,
+    &[disabled],
+    &.disabled {
+        border-radius: 1px solid var($text-color);
+        color: var($text-color);
+        pointer-events: none;
+        cursor: default;
+    }
+}
