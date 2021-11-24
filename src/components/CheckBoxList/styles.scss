@@ -3,6 +3,8 @@
 .checkbox-list {
     &__list {
         li {
+            display: flex;
+            margin-top: 2rem;
             &.active {
                 font-weight: 700;
                 color: $primary-color;
