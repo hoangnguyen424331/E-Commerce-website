@@ -1,4 +1,4 @@
-@import 'src/assets/scss/common';
+@import "src/assets/scss/common";
 
 .filter-panel {
   .category {
@@ -26,20 +26,6 @@
     }
 
     &__item {
-      &.active {
-        .category__link {
-          color: $primary-color;
-          font-weight: 700;
-
-          &::before {
-            @include absolute(50%, null, null, 7px);
-            @include transform(translateY(calc(-50% - 1px)));
-            content: '';
-            border: 4px solid;
-            border-color: transparent transparent transparent $primary-color;
-          }
-        }
-      }
     }
 
     &__link {
@@ -54,6 +40,21 @@
       &:hover {
         right: -4px;
         color: $primary-color;
+      }
+
+      &.active {
+        .category__link {
+          color: $primary-color;
+          font-weight: 700;
+
+          &::before {
+            @include absolute(50%, null, null, 7px);
+            @include transform(translateY(calc(-50% - 1px)));
+            content: "";
+            border: 4px solid;
+            border-color: transparent transparent transparent $primary-color;
+          }
+        }
       }
     }
   }
