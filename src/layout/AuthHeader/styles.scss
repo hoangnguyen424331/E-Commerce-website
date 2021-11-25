@@ -1,0 +1,40 @@
+@import "../../assets/scss/common";
+
+.auth-header {
+    display: flex;
+    align-items: center;
+    height: 9rem;
+    background-color: var(white);
+
+    &__main {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__left {
+        display: flex;
+        align-items: center;
+    }
+
+    &__logo {
+        @include relative;
+        bottom: 0.5rem;
+        &-img {
+            height: 4.2rem;
+            width: auto;
+        }
+    }
+
+    &__title {
+        margin-left: 5rem;
+        font-size: 1.8rem;
+        color: $text-color;
+        font-weight: 500;
+    }
+
+    &__help {
+        text-decoration: none;
+        color: $primary-color;
+    }
+}
