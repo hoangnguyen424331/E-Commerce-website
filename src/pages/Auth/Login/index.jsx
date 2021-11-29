@@ -7,6 +7,7 @@ import InputField from 'src/components/InputField'
 import PasswordField from 'src/components/PasswordField'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
+import useAuth from 'src/hooks/useAuth'
 
 function Login(props) {
   const initialValues = {
@@ -25,6 +26,9 @@ function Login(props) {
       .min(6, 'Email có độ dài từ 6 - 160 kí tự')
       .max(160, 'Email có độ dài từ 6 - 160 kí tự')
   })
+
+  const { loginWithEmailAndPassword, error } = useAuth()
+
   return (
     <div>
       <AuthSection>
@@ -33,9 +37,11 @@ function Login(props) {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
+            onSubmit={loginWithEmailAndPassword}
           >
             {formik => (
               <Form className="auth-form__main">
+                {error && <p className="error">{error}</p>}
                 <InputField name="email" type="email" placeholder="Email" />
                 <PasswordField
                   name="password"

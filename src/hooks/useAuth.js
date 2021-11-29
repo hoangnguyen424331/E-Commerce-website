@@ -1,11 +1,15 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import LocalStorage from 'src/constants/localStorage'
 import { path } from '../constants/path'
 import { auth } from 'src/firebase/firebase'
-import { createUserWithEmailAndPassword, updateProfile } from '@firebase/auth'
-import { register } from 'src/pages/Auth/auth.slice'
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithEmailAndPassword
+} from '@firebase/auth'
+import { register, fetchUser } from 'src/pages/Auth/auth.slice'
 
 const useAuth = () => {
   const dispatch = useDispatch()
@@ -30,9 +34,10 @@ const useAuth = () => {
       })
 
       if (reponse.user) {
-        const { accessToken, id, displayName, photoURL } = reponse.user
+        const { accessToken, uid, displayName, photoURL } = reponse.user
         const newUser = {
-          id: id,
+          accessToken,
+          id: uid,
           displayName,
           photoURL,
           role: 'user',
@@ -51,10 +56,33 @@ const useAuth = () => {
     }
   }
 
+  const loginWithEmailAndPassword = async data => {
+    const { email, password } = data
+    try {
+      const reponse = await signInWithEmailAndPassword(auth, email, password)
+      if (reponse.user) {
+        const { accessToken, uid: userId } = reponse.user
+
+        localStorage.setItem(localStorage.accessToken, accessToken)
+        dispatch(fetchUser(userId))
+        setError(null)
+        history.push(path.home)
+      }
+    } catch (error) {
+      setError(error)
+    }
+  }
+
   let errorMessage
   switch (error?.code) {
     case 'auth/email-already-in-use':
       errorMessage = 'Email nãy đã sử dụng'
+      break
+    case 'auth/wrong-password':
+      errorMessage = 'Sai mật khẩu'
+      break
+    case 'auth/wrong-not-found':
+      errorMessage = 'Tài khoản này không tồn tại'
       break
     default:
       errorMessage = error?.code
@@ -63,6 +91,7 @@ const useAuth = () => {
   return {
     authenticated,
     registerWithEmailAndPassword,
+    loginWithEmailAndPassword,
     error: errorMessage
   }
 }
