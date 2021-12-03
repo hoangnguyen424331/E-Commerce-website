@@ -45,3 +45,20 @@ export const extractData = (name, data) => {
   changedData = changedData.sort((a, b) => a.name.localeCompare(b.name))
   return changedData
 }
+
+export const convertNameIdToProductName = param => {
+  const nameIdArr = param.split('-i.')
+  return nameIdArr[0].split('-').join(' ')
+}
+
+export const formatRatingNumber = value => {
+  if (Number.isInteger(value)) return `${value}.0`
+}
+
+export const discountPercentage = (original, sale) =>
+  Math.round(((original - sale) * 100) / original) + '%'
+
+export const getProductIdFromParam = param => {
+  const arr = param.split('-i.')
+  return arr[arr.length - 1]
+}

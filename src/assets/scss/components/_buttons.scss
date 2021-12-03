@@ -6,22 +6,36 @@
     justify-content: center;
     height: 3.5rem;
     color: $white;
-    background-color: var($primary-color);
+    padding: 0.1rem 1.5rem;
+    background-color: $primary-color;
     padding: 1px 15px;
     text-transform: capitalize;
-    border: none;
+    border: 0.1rem solid $primary-color;
     user-select: none;
 
     &:hover {
-        background-color: rgba(var($primary-color), 0.8);
+        background-color: rgba($primary-color, 0.8);
     }
 
     &:disabled,
     &[disabled],
     &.disabled {
-        border-radius: 1px solid var($text-color);
+        border-radius: 1px solid $text-color;
         color: var($text-color);
         pointer-events: none;
         cursor: default;
+    }
+
+    &--lg {
+        padding: 2.4rem 1.5rem;
+    }
+
+    &--outline {
+        background-color: $secondary-color;
+        color: $primary-color;
+
+        &:hover {
+            background-color: rgba($secondary-color, 0.4);
+        }
     }
 }

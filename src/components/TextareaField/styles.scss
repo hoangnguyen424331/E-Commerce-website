@@ -1,0 +1,5 @@
+@import '../../assets/scss/common';
+
+.textarea--error {
+    border-color: $error-color !important;
+}

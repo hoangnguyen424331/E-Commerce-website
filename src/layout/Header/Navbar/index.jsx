@@ -8,12 +8,12 @@ import {
 import { Link } from 'react-router-dom'
 import { path } from 'src/constants/path'
 import './styles.scss'
-import userAuth from 'src/hooks/useAuth'
-import { useSelector } from 'react-redux'
+import noCartImage from 'src/assets/images/no-cart.png'
 
 function Navbar(props) {
-  const { authenticated } = userAuth()
-  const { profile } = useSelector(state => state.auth)
+  const userAuth = {
+    name: 'Hoang Nguyen'
+  }
 
   return (
     <nav className="navbar">
@@ -42,7 +42,7 @@ function Navbar(props) {
             Trợ giúp
           </Link>
         </li>
-        {!authenticated ? (
+        {!userAuth ? (
           <>
             <li className="navbar__item navbar__item--strong navbar__item--separate">
               <Link className="navbar__link" to={path.register}>
@@ -60,11 +60,11 @@ function Navbar(props) {
             <div className="navbar__user">
               <Link to={path.purchase} className="navbar__user-info">
                 <img
-                  src={profile.photoURL}
+                  src={noCartImage}
                   alt="user avatar"
                   className="navbar__user-img"
                 />
-                <span className="navbar__user-name">{profile.displayName}</span>
+                <span className="navbar__user-name">{userAuth.name}</span>
               </Link>
 
               <ul className="navbar__user-menu">

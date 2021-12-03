@@ -1,0 +1,217 @@
+@import "../../assets/scss/common";
+
+.product-detail {
+    padding-bottom: 8rem;
+
+    &__wrap {
+        @include borderRadius(0.2rem);
+        overflow: hidden;
+        background-color: $white;
+        box-shadow: 0 0.1rem 0.1rem 0 rgba($black, 0.2);
+    }
+
+    &__slider {
+        padding: 1.5rem;
+    }
+
+    &__meta {
+        padding: 1.5rem 1.5rem 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__title {
+        font-weight: 700;
+        font-size: 2.2rem;
+        line-height: 2.4rem;
+        text-align: start;
+        margin-bottom: 1.5rem;
+    }
+
+    &__meta-inner {
+        display: flex;
+
+        &-item {
+            display: flex;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            border-right: 1px solid rgba($black, 0.2);
+
+            &:first-child {
+                padding-left: 0;
+            }
+
+            &:last-child {
+                border-right: 0;
+            }
+        }
+    }
+
+    &__rating {
+        @extend .product-detail__meta-inner-item;
+        margin-bottom: 1.5rem;
+
+        & > span {
+            color: $primary-color;
+            font-size: 1.8rem;
+            margin-right: 1rem;
+
+            &:first-child {
+                border-bottom: 0.1rem solid $primary-color;
+            }
+        }
+    }
+
+    .rating-stars {
+        svg {
+            margin-right: 0;
+        }
+    }
+
+    &__sold {
+        @extend .product-detail__meta-inner-item;
+        margin-bottom: 1.5rem;
+
+        span {
+            &:first-child {
+                font-size: 1.8rem;
+                color: $text-color;
+                margin-right: 0.5rem;
+                padding-bottom: 0.1rem;
+            }
+
+            &:last-child {
+                font-size: 1.4rem;
+                color: $light-text-color;
+            }
+        }
+    }
+
+    &__price {
+        margin-bottom: 1.5rem;
+        padding: 2.2rem 2rem;
+        display: flex;
+        background-color: $backgroud-color;
+
+        &-original {
+            color: $light-text-color;
+            text-decoration: line-through;
+            margin-right: 1.5rem;
+            font-size: 1.6rem;
+        }
+
+        &-sale {
+            font-size: 3rem;
+            font-weight: 500;
+            color: $primary-color;
+            margin-right: 1.7rem;
+        }
+    }
+
+    &__discount {
+        @include borderRadius(0.2rem);
+        padding: 0.4rem;
+        line-height: 1;
+        font-size: 1.2rem;
+        font-weight: 600;
+        background-color: $primary-color;
+        color: $white;
+    }
+
+    .buy-qty {
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        color: $light-text-color;
+        font-size: 1.6rem;
+
+        &-title {
+            margin-right: 4.7rem;
+        }
+
+        &__stock {
+            margin-left: 1.5rem;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+
+        button {
+            margin-right: 1.4rem;
+        }
+    }
+
+    &__button-icon {
+        margin-right: 0.6rem;
+    }
+
+    &__protect {
+        display: flex;
+        align-items: center;
+        padding: 2.5rem 2rem;
+        text-decoration: none;
+        color: $text-color;
+        border-top: 1px solid $break-line-color;
+
+        span {
+            display: flex;
+
+            &:last-child {
+                margin-left: 1.4rem;
+                color: $light-text-color;
+            }
+
+            svg {
+                margin-right: 0.4rem;
+                font-size: 2rem;
+                color: $primary-color;
+            }
+        }
+    }
+
+    &-content {
+        &__wrap {
+            @include borderRadius(0.2rem);
+            margin-top: 2rem;
+            padding: 2rem;
+            background-color: $white;
+            overflow: hidden;
+            box-shadow: 0 0.1rem 0.1rem 0 rgba($black, 0.1);
+        }
+
+        &__heading {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: $text-color;
+            text-align: start;
+        }
+    }
+
+    &-desc {
+        &__heading {
+            padding: 1.4rem;
+            background-color: $backgroud-color;
+            text-align: start;
+        }
+
+        &__detail {
+            margin: 3rem 1.5rem 1.5rem;
+            font-size: 1.4rem;
+            line-height: 2.2;
+            color: $text-color;
+        }
+    }
+
+    &-review {
+        &__content {
+            text-align: start;
+            border-bottom: 1px solid $break-line-color;
+        }
+    }
+
+    .watched-products {
+        margin-top: 2rem;
+    }
+}
