@@ -15,8 +15,8 @@ html {
 body {
     font-size: 1.4rem;
     font-weight: 400;
-    font-family: var($primary-font);
-    background-color: var($backgroud-color);
+    font-family: $primary-font;
+    background-color: $backgroud-color;
     color: $text-color;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

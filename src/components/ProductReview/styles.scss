@@ -1,0 +1,58 @@
+@import "../../assets/scss/common";
+
+.product-reviews {
+    .product-review {
+        margin-top: 2rem;
+        padding: 2rem 0 1.5rem 2rem;
+        border-bottom: 0.1rem solid $break-line-color;
+
+        &__wrap {
+            display: flex;
+        }
+
+        &__user-avatar {
+            margin-right: 1rem;
+
+            img {
+                @include borderRadius(50%);
+                height: 3rem;
+                width: 3rem;
+            }
+        }
+
+        &__content {
+            flex: 1;
+        }
+
+        &__rating-starts {
+            margin-top: 0.4rem;
+
+            .rating-starts {
+                color: $primary-color;
+            }
+        }
+
+        &__comment {
+            margin: 1rem 0;
+        }
+
+        &__datetime {
+            font-size: 1.2rem;
+            color: $light-text-color;
+        }
+    }
+
+    &__no-reviews {
+        height: 30rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        p {
+            margin-top: 2rem;
+            font-size: 1.6rem;
+            color: $text-color;
+        }
+    }
+}

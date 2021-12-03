@@ -12,8 +12,6 @@ import Admin from './pages/Admin'
 import Cart from './pages/Cart'
 import Breadcrumbs from './components/Breadcrumbs'
 import AuthLayout from './layout/AuthLayout'
-import UnauthenticatedGuard from './guards/UnauthenticatedGuard'
-import AuthenticatedGuard from './guards/AuthenticatedGuard'
 
 export default function Routes() {
   return (
@@ -24,20 +22,16 @@ export default function Routes() {
         </MainLayout>
       </Route>
       <Route path={path.login}>
-        <UnauthenticatedGuard>
-          <AuthLayout title="Đăng nhập">
-            <Login />
-          </AuthLayout>
-        </UnauthenticatedGuard>
+        <AuthLayout title="Đăng nhập">
+          <Login />
+        </AuthLayout>
       </Route>
       <Route path={path.register}>
-        <UnauthenticatedGuard>
-          <AuthLayout title="Đăng ký">
-            <Register />
-          </AuthLayout>
-        </UnauthenticatedGuard>
+        <AuthLayout title="Đăng ký">
+          <Register />
+        </AuthLayout>
       </Route>
-      <Route path={path.products}>
+      <Route path={path.products} exact>
         <MainLayout>
           <Breadcrumbs />
           <Products />
@@ -45,6 +39,7 @@ export default function Routes() {
       </Route>
       <Route path={path.productDetail}>
         <MainLayout>
+          <Breadcrumbs />
           <ProductDetail />
         </MainLayout>
       </Route>
@@ -52,16 +47,12 @@ export default function Routes() {
         <Cart />
       </Route>
       <Route path={path.user}>
-        <AuthenticatedGuard>
-          <MainLayout>
-            <User />
-          </MainLayout>
-        </AuthenticatedGuard>
+        <MainLayout>
+          <User />
+        </MainLayout>
       </Route>
       <Route path={path.admin}>
-        <AuthenticatedGuard>
-          <Admin />
-        </AuthenticatedGuard>
+        <Admin />
       </Route>
       <Route path={path.notFound}>
         <NotFound />
