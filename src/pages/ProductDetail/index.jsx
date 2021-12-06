@@ -23,6 +23,7 @@ import ProductReview from 'src/components/ProductReview'
 import ProductListSlider from 'src/components/ProductListSlider'
 import ReviewForm from '../../components/ReviewForm'
 import { getProductReviews } from 'src/components/ProductReview/productReview.slice'
+import { cartAction } from '../Cart/cart.slice'
 
 function ProductDetail(props) {
   const dispatch = useDispatch()
@@ -34,6 +35,7 @@ function ProductDetail(props) {
   useEffect(() => {
     ;(async () => {
       try {
+        setQuantity(1)
         const productId = getProductIdFromParam(productParamId)
         const productDetailResponse = await dispatch(
           getProductDetail(productId)
@@ -52,6 +54,10 @@ function ProductDetail(props) {
 
   const handleQuantityChange = value => {
     setQuantity(value)
+  }
+
+  const handleAddToCart = () => {
+    dispatch(cartAction.addToCart({ product: productDetail, quantity }))
   }
 
   return (
@@ -111,7 +117,10 @@ function ProductDetail(props) {
                     />
                     Yêu thích
                   </button>
-                  <button className="button button--lg button--outline">
+                  <button
+                    className="button button--lg button--outline"
+                    onClick={handleAddToCart}
+                  >
                     <AddShoppingCart
                       fontSize="large"
                       className="product-detail__button-icon"
@@ -150,7 +159,7 @@ function ProductDetail(props) {
                 <ProductReview />
               </div>
               <div className="product-detail-review__form">
-                <ReviewForm productId={productDetail.id}/>
+                <ReviewForm productId={productDetail.id} />
               </div>
             </div>
           </div>
