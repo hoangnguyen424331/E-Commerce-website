@@ -22,6 +22,7 @@ import { Link } from 'react-router-dom'
 import ProductReview from 'src/components/ProductReview'
 import ProductListSlider from 'src/components/ProductListSlider'
 import ReviewForm from '../../components/ReviewForm'
+import { getProductReviews } from 'src/components/ProductReview/productReview.slice'
 
 function ProductDetail(props) {
   const dispatch = useDispatch()
@@ -38,6 +39,10 @@ function ProductDetail(props) {
           getProductDetail(productId)
         )
         unwrapResult(productDetailResponse)
+        const productReviewsResoinse = await dispatch(
+          getProductReviews(productId)
+        )
+        unwrapResult(productReviewsResoinse)
       } catch (error) {
         // eslint-disable-next-line no-console
         console.log(error)
@@ -145,7 +150,7 @@ function ProductDetail(props) {
                 <ProductReview />
               </div>
               <div className="product-detail-review__form">
-                <ReviewForm />
+                <ReviewForm productId={productDetail.id}/>
               </div>
             </div>
           </div>
