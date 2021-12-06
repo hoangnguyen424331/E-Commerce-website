@@ -7,6 +7,7 @@ import ProductsMainContent from './components/ProductMainContent'
 import { getProducts } from './product.slice'
 import './styles.scss'
 import useQuery from 'src/hooks/useQuery'
+import { unwrapResult } from '@reduxjs/toolkit'
 
 function Products(props) {
   const dispatch = useDispatch()
@@ -37,11 +38,13 @@ function Products(props) {
           _order: _filters._order,
           name_like: _filters.name_like
         }
-        dispatch(getProducts({ params }))
+        const productResponse = await dispatch(getProducts({ params }))
+        unwrapResult(productResponse)
 
         delete params._page
         delete params._limit
-        dispatch(getAllProducts({ params }))
+        const allProductResponse = await dispatch(getAllProducts({ params }))
+        unwrapResult(allProductResponse)
       } catch (error) {
         // eslint-disable-next-line
         console.log(error.message)
