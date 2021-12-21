@@ -3,7 +3,8 @@ import Slider from 'react-slick'
 import ProductItem from '../ProductItem'
 import PropTypes from 'prop-types'
 import './styles.scss'
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons'
+import CirclePreviousBtn from '../CirclePreviousBtn'
+import CircleNextBtn from '../CircleNextBtn'
 
 ProductListSlider.propTypes = {
   title: PropTypes.string,
@@ -11,39 +12,33 @@ ProductListSlider.propTypes = {
 }
 
 function ProductListSlider({ title, products }) {
-  const PreviousBtn = props => {
-    const { className, onClick } = props
-
-    return (
-      <div className={className} onClick={onClick}>
-        <KeyboardArrowLeft
-          fontSize="large"
-          className="products-list-slider__icon"
-        />
-      </div>
-    )
-  }
-
-  const NextBtn = props => {
-    const { className, onClick } = props
-
-    return (
-      <div className={className} onClick={onClick}>
-        <KeyboardArrowRight
-          fontSize="large"
-          className="products-list-slider__icon"
-        />
-      </div>
-    )
-  }
-
   const settings = {
     infinite: true,
     speed: 500,
     autoplay: true,
-    autoSpeed: 2000,
+    autoplaySpeed: 2000,
     slidesToShow: 6,
-    slidesToScroll: 1
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1
+        }
+      }
+    ]
   }
 
   return (
@@ -52,8 +47,9 @@ function ProductListSlider({ title, products }) {
       {products.length ? (
         <Slider
           {...settings}
-          prevArrow={<PreviousBtn />}
-          nextArrow={<NextBtn />}
+          prevArrow={<CirclePreviousBtn />}
+          nextArrow={<CircleNextBtn />}
+          className="slider--circle-btn"
         >
           {products.map(product => (
             <ProductItem key={product.id} product={product} />
