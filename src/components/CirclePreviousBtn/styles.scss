@@ -1,0 +1,6 @@
+@import "../../assets/scss/common";
+
+.circle-previous-btn {
+    @include absoluteCenter;
+    color: $light-text-color;
+}
