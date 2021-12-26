@@ -30,6 +30,13 @@ const auth = createSlice({
   extraReducers: {
     [register.fulfilled]: handleAuthFulfilled,
     [login.fulfilled]: handleAuthFulfilled
+  },
+  reducers: {
+    logout: (state, action) => {
+      state.profile = {}
+      localStorage.removeItem(LocalStorage.user)
+      localStorage.removeItem(LocalStorage.accessToken)
+    }
   }
 })
 
