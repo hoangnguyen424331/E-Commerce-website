@@ -1514,18 +1514,14 @@
   ],
   "users": [
     {
-      "id": "riViPaxAiKYdDm9gYBoI5KD6Kji2",
-      "displayName": "Hoang Nguyen",
-      "photoURL": "https://cf.shopee.vn/file/d814f2831935bb1a9143abfe2e16d293",
-      "role": "user",
-      "status": 1,
-      "firstName": "Hoang",
-      "lastName": "Nguyen",
+      "createdAt": 1640430552859,
+      "displayName": "Nguyen Hoang",
       "email": "nguyen424331@gmail.com",
-      "phone": "0905424331",
-      "createdAt": 1632716581337,
-      "dob": "2001-12-04",
-      "address": "162 ABC, XYZ, YKMLAAA"
+      "firstName": "Nguyen",
+      "id": "Xkayo2bBR5Uu8Ov6f5zM9BZZdIo2",
+      "lastName": "Hoang",
+      "photoURL": "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png",
+      "role": "user"
     },
     {
       "id": "cswo3GSW0UfmgUBAg4DiEfPljnf2",
@@ -1537,6 +1533,16 @@
       "lastName": "Admin",
       "email": "admin@shopy.vn",
       "createdAt": 1633391812450
+    },
+    {
+      "id": "Xkayo2bBR5Uu8Ov6f5zM9BZZdIo2",
+      "displayName": "Nguyen Hoang",
+      "photoURL": "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png",
+      "role": "user",
+      "firstName": "Nguyen",
+      "lastName": "Hoang",
+      "email": "nguyen424331@gmail.com",
+      "createdAt": 1640430552859
     }
   ]
 }

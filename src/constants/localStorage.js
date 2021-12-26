@@ -1,6 +1,7 @@
 export const LocalStorage = {
   cart: 'cart',
-  viewedProducts: 'viewedProducts'
+  viewedProducts: 'viewedProducts',
+  accessToken: 'accessToken'
 }
 
 export default LocalStorage
