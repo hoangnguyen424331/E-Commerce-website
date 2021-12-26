@@ -7,6 +7,7 @@ import * as Yup from 'yup'
 import PasswordField from 'src/components/PasswordField'
 import AuthSection from '../AuthSection'
 import InputField from 'src/components/InputField'
+import useAuth from 'src/hooks/useAuth'
 
 function Register(props) {
   const initialValues = {
@@ -16,6 +17,8 @@ function Register(props) {
     password: '',
     confirmPassword: ''
   }
+
+  const { registerWithEmailAndPassword, error } = useAuth()
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -49,9 +52,11 @@ function Register(props) {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
+          onSubmit={registerWithEmailAndPassword}
         >
           {formik => (
             <Form className="auth-form__main">
+              {error && <p className="error">{error}</p>}
               <InputField name="firstName" type="text" placeholder="Tên" />
               <InputField name="lastName" type="text" placeholder="Họ" />
               <InputField name="email" type="email" placeholder="Email" />
