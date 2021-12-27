@@ -19,11 +19,12 @@ import QuantityController from 'src/components/QuantityController'
 import { AddShoppingCart, FavoriteBorder } from '@material-ui/icons'
 import { SiAdguard } from 'react-icons/si'
 import { Link } from 'react-router-dom'
-import ProductReview from 'src/components/ProductReview'
+import ProductReviews from 'src/pages/ProductDetail/components/ProductReview'
 import ProductListSlider from 'src/components/ProductListSlider'
-import ReviewForm from '../../components/ReviewForm'
-import { getProductReviews } from 'src/components/ProductReview/productReview.slice'
+import ReviewForm from './components/ReviewForm'
+import { getProductReviews } from 'src/pages/ProductDetail/components/ProductReview/productReview.slice'
 import { cartAction } from '../Cart/cart.slice'
+import useAuth from 'src/hooks/useAuth'
 
 function ProductDetail(props) {
   const dispatch = useDispatch()
@@ -31,6 +32,7 @@ function ProductDetail(props) {
   const { productDetail, loading } = useSelector(state => state.productDetail)
   const [quantity, setQuantity] = useState(1)
   const { products } = useSelector(state => state.products)
+  const { authenticated } = useAuth()
 
   useEffect(() => {
     ;(async () => {
@@ -156,11 +158,13 @@ function ProductDetail(props) {
                 Đánh giá sản phẩm
               </div>
               <div className="product-detail-review__content">
-                <ProductReview />
+                <ProductReviews />
               </div>
-              <div className="product-detail-review__form">
-                <ReviewForm productId={productDetail.id} />
-              </div>
+              {authenticated && (
+                <div className="product-detail-review__form">
+                  <ReviewForm productId={productDetail.id} />
+                </div>
+              )}
             </div>
           </div>
           <div className="watched-products">
