@@ -7,7 +7,7 @@ const productReviewsApi = {
     return http.post(URL, data)
   },
   getProductReviews(productId) {
-    return http.get(URL, `?productId=${productId}`)
+    return http.get(URL + `?productId=${productId}`)
   }
 }
 

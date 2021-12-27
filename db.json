@@ -1313,6 +1313,15 @@
       "comment": "Chất lượng kém quá",
       "createdAt": 1632858205453,
       "id": 6
+    },
+    {
+      "userName": "Nguyen Hoang",
+      "userId": "Xkayo2bBR5Uu8Ov6f5zM9BZZdIo2",
+      "productId": "60afad846ef5b902180aacb0",
+      "rating": 5,
+      "comment": "san pham tot",
+      "createdAt": 1640593800168,
+      "id": 7
     }
   ],
   "banners": {

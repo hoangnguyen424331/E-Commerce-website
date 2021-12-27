@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import productReviewsApi from 'src/api/productReview.api'
+import productReviewApi from 'src/api/productReview.api'
 import { payLoadCreater } from 'src/utils/helper'
 
 export const getProductReviews = createAsyncThunk(
-  'productReview/getProductReviews',
-  payLoadCreater(productReviewsApi.getProductReviews)
+  'productReviews/getProductReviews',
+  payLoadCreater(productReviewApi.getProductReviews)
 )
 
 export const postProductReviews = createAsyncThunk(
-  'productReview/postProductReviews',
-  payLoadCreater(productReviewsApi.postProductReviews)
+  'productReviews/postProductReviews',
+  payLoadCreater(productReviewApi.postProductReviews)
 )
 
 const productReviews = createSlice({
@@ -17,7 +17,7 @@ const productReviews = createSlice({
   initialState: {
     productReviews: [],
     loading: false,
-    error: '',
+    loadingError: '',
     sending: false,
     sendingError: ''
   },
@@ -31,7 +31,7 @@ const productReviews = createSlice({
     },
     [getProductReviews.rejected]: (state, action) => {
       state.loading = false
-      state.error = action.payload
+      state.loadingError = action.payload.status
     },
     [postProductReviews.pending]: (state, action) => {
       state.sending = true
@@ -42,7 +42,7 @@ const productReviews = createSlice({
     },
     [postProductReviews.rejected]: (state, action) => {
       state.sending = false
-      state.sendingError = action.payload
+      state.sendingError = action.payload.status
     }
   }
 })

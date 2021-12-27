@@ -1,16 +1,17 @@
+import { unwrapResult } from '@reduxjs/toolkit'
 import { Form, Formik } from 'formik'
 import React, { useState } from 'react'
 import { FaStar } from 'react-icons/fa'
-import * as Yup from 'yup'
-import './styles.scss'
-import TextareaField from '../TextareaField'
 import { useDispatch, useSelector } from 'react-redux'
+import TextareaField from 'src/components/TextareaField'
+import * as Yup from 'yup'
 import { postProductReviews } from '../ProductReview/productReview.slice'
-import { unwrapResult } from '@reduxjs/toolkit'
+import './styles.scss'
 
 function ReviewForm({ productId }) {
   const dispatch = useDispatch()
   const { sendingError } = useSelector(state => state.productReviews)
+  const { profile } = useSelector(state => state.auth)
   const [currentRating, setCurrentRating] = useState(0)
   const [hoverRating, setHoverRating] = useState(null)
   const [ratingError, setRatingError] = useState(false)
@@ -35,8 +36,8 @@ function ReviewForm({ productId }) {
   const validationSchema = Yup.object().shape({
     productComment: Yup.string()
       .required('Nhận xét là trường bắt buộc')
-      .min(6, 'Nhận xét có độ dài từ 6-500 kí tự')
-      .max(500, 'Nhận xét có độ dài từ 6-500 kí tự')
+      .min(6, 'Nhận xét có độ dài từ 6 - 500 kí tự')
+      .max(500, 'Nhận xét có độ dài từ 6 - 500 kí tự')
   })
 
   const onReviewFormSubmit = async ({ productComment }, { resetForm }) => {
@@ -45,20 +46,22 @@ function ReviewForm({ productId }) {
         setRatingError(true)
       } else {
         const productReviewData = {
+          userName: profile.displayName,
+          userId: profile.id,
           productId,
           rating: currentRating,
           comment: productComment
         }
-        const reponse = await dispatch(postProductReviews(productReviewData))
-        const res = unwrapResult(reponse)
+        const response = await dispatch(postProductReviews(productReviewData))
+        const res = unwrapResult(response)
         if (res.status === 201) {
           setCurrentRating(0)
           resetForm({ productComment: '' })
         }
       }
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error)
+    } catch (err) {
+      // eslint-disable-next-line
+      console.log(err)
     }
   }
 
@@ -72,7 +75,7 @@ function ReviewForm({ productId }) {
         {formik => (
           <Form className="review-form">
             {sendingError && (
-              <p className="error">Có lỗi khi gửi đánh giá {sendingError}</p>
+              <p className="error">Có lỗi khi gửi đánh giá: {sendingError}</p>
             )}
             <div className="review-form__rating">
               {Array.from({ length: 5 }, (_, index) => (
@@ -95,13 +98,13 @@ function ReviewForm({ productId }) {
               )}
             </div>
             <TextareaField
-              name="productCommnet"
+              name="productComment"
               cols="100"
               rows="6"
               placeholder="Hãy chia sẽ những gì bạn thích về sản phẩm này nhé"
               className="review-form__comment"
             />
-            <button className="reiview-form__button button">
+            <button className="review-form__button button" type="submit">
               Gửi đánh giá
             </button>
           </Form>
