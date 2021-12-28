@@ -11,7 +11,8 @@ import {
   formatCurrency,
   formatQuantity,
   formatRatingNumber,
-  getProductIdFromParam
+  getProductIdFromParam,
+  isProductExisInList
 } from 'src/utils/helper'
 import './styles.scss'
 import RatingStars from 'src/components/RatingStars'
@@ -25,14 +26,16 @@ import ReviewForm from './components/ReviewForm'
 import { getProductReviews } from 'src/pages/ProductDetail/components/ProductReview/productReview.slice'
 import { cartAction } from '../Cart/cart.slice'
 import useAuth from 'src/hooks/useAuth'
+import LocalStorage from 'src/constants/localStorage'
 
 function ProductDetail(props) {
   const dispatch = useDispatch()
   const { productParamId } = useParams()
   const { productDetail, loading } = useSelector(state => state.productDetail)
   const [quantity, setQuantity] = useState(1)
-  const { products } = useSelector(state => state.products)
   const { authenticated } = useAuth()
+  const viewedProductList =
+    JSON.parse(localStorage.getItem(LocalStorage.viewedProducts)) || []
 
   useEffect(() => {
     ;(async () => {
@@ -53,6 +56,48 @@ function ProductDetail(props) {
       }
     })()
   }, [productParamId, dispatch])
+
+  useEffect(() => {
+    let newViewedProduct = null
+    const viewedProducts =
+      JSON.parse(localStorage.getItem(LocalStorage.viewedProducts)) || []
+
+    if (Object.keys(productDetail).length) {
+      const {
+        id,
+        image,
+        name,
+        price_before_discount,
+        price,
+        rating,
+        sold,
+        place
+      } = productDetail
+
+      newViewedProduct = {
+        id,
+        image,
+        name,
+        price_before_discount,
+        price,
+        rating,
+        sold,
+        place: { name: place.name }
+      }
+    }
+
+    if (
+      newViewedProduct &&
+      !isProductExisInList(newViewedProduct, viewedProducts)
+    ) {
+      viewedProducts.length > 10 && viewedProducts.pop()
+      viewedProducts.unshift(newViewedProduct)
+      localStorage.setItem(
+        LocalStorage.viewedProducts,
+        JSON.stringify(viewedProducts)
+      )
+    }
+  }, [productDetail])
 
   const handleQuantityChange = value => {
     setQuantity(value)
@@ -168,7 +213,10 @@ function ProductDetail(props) {
             </div>
           </div>
           <div className="watched-products">
-            <ProductListSlider title={'Sản phẩm đã xem'} products={products} />
+            <ProductListSlider
+              title={'Sản phẩm đã xem'}
+              products={viewedProductList}
+            />
           </div>
         </Container>
       )}
