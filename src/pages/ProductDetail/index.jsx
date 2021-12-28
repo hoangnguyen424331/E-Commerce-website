@@ -27,6 +27,9 @@ import { getProductReviews } from 'src/pages/ProductDetail/components/ProductRev
 import { cartAction } from '../Cart/cart.slice'
 import useAuth from 'src/hooks/useAuth'
 import LocalStorage from 'src/constants/localStorage'
+import { toast } from 'react-toastify'
+import { path } from 'src/constants/path'
+import { useHistory } from 'react-router-dom'
 
 function ProductDetail(props) {
   const dispatch = useDispatch()
@@ -36,6 +39,7 @@ function ProductDetail(props) {
   const { authenticated } = useAuth()
   const viewedProductList =
     JSON.parse(localStorage.getItem(LocalStorage.viewedProducts)) || []
+  const history = useHistory()
 
   useEffect(() => {
     ;(async () => {
@@ -104,7 +108,12 @@ function ProductDetail(props) {
   }
 
   const handleAddToCart = () => {
-    dispatch(cartAction.addToCart({ product: productDetail, quantity }))
+    if (!authenticated) {
+      history.push(path.login)
+    } else {
+      dispatch(cartAction.addToCart({ product: productDetail, quantity }))
+      toast.success('Thêm vào giỏ hàng thành công')
+    }
   }
 
   return (
@@ -165,7 +174,7 @@ function ProductDetail(props) {
                     Yêu thích
                   </button>
                   <button
-                    className="button button--lg button--outline"
+                    className="button button--lg"
                     onClick={handleAddToCart}
                   >
                     <AddShoppingCart

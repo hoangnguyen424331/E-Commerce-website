@@ -1322,6 +1322,15 @@
       "comment": "san pham tot",
       "createdAt": 1640593800168,
       "id": 7
+    },
+    {
+      "userName": "Nguyen Hoang",
+      "userId": "Xkayo2bBR5Uu8Ov6f5zM9BZZdIo2",
+      "productId": "60ad02f62fb52902585972aa",
+      "rating": 4,
+      "comment": "san pham tot",
+      "createdAt": 1640683379587,
+      "id": 8
     }
   ],
   "banners": {
