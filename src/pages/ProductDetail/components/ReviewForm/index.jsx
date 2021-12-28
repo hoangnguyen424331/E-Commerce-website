@@ -7,6 +7,7 @@ import TextareaField from 'src/components/TextareaField'
 import * as Yup from 'yup'
 import { postProductReviews } from '../ProductReview/productReview.slice'
 import './styles.scss'
+import { toast } from 'react-toastify'
 
 function ReviewForm({ productId }) {
   const dispatch = useDispatch()
@@ -55,6 +56,7 @@ function ReviewForm({ productId }) {
         const response = await dispatch(postProductReviews(productReviewData))
         const res = unwrapResult(response)
         if (res.status === 201) {
+          toast.success('Đánh giá sản phẩm thành công')
           setCurrentRating(0)
           resetForm({ productComment: '' })
         }
@@ -62,6 +64,7 @@ function ReviewForm({ productId }) {
     } catch (err) {
       // eslint-disable-next-line
       console.log(err)
+      toast.error('Đánh giá sản phẩm thất bại')
     }
   }
 
