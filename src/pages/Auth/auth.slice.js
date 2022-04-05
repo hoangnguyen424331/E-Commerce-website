@@ -36,6 +36,7 @@ const auth = createSlice({
       state.profile = {}
       localStorage.removeItem(LocalStorage.user)
       localStorage.removeItem(LocalStorage.accessToken)
+      localStorage.removeItem(LocalStorage.cart)
     }
   }
 })

@@ -1,4 +1,4 @@
-$backgroud-color: #F5F5F5;
+$backgroud-color: #f5f5f5;
 $text-color: #333;
 $light-text-color: #737373;
 $line-text-color: #767676;
@@ -12,16 +12,24 @@ $primary-color: #ed4033;
 $primary-color-light: #ef6036;
 $secondary-color: #fbefed;
 
-$primary-font: var("Inter", sans-serif);
+$primary-font: var('Inter', sans-serif);
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-VariableFont_slnt\,wght.ttf')
+    format('woff2 supports variations')
+    url('../fonts/Inter-VariableFont_slnt\,wght.ttf') format('woff2-variations');
+  font-weight: 100 900;
+}
 
 $header-height: 12rem;
 $navbar-height: 3.4rem;
 
 $breakpoints: (
-    xs: 0,
-    sm: 576px,
-    md: 768px,
-    lg: 992px,
-    xl: 1200px,
-    xxl: 1400px,
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
 );
