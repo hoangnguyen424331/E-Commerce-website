@@ -14,6 +14,8 @@ import Breadcrumbs from './components/Breadcrumbs'
 import AuthLayout from './layout/AuthLayout'
 import UnauthenticatedGuard from './guards/UnanthenticatedGuard'
 import AuthenticatedGuard from './guards/AuthenticatedGuard'
+import AdminGuard from './guards/AdminGuard'
+import AdminLayout from './layout/AdminLayout'
 
 export default function Routes() {
   return (
@@ -61,7 +63,11 @@ export default function Routes() {
       </Route>
       <Route path={path.admin}>
         <AuthenticatedGuard>
-          <Admin />
+          <AdminGuard>
+            <AdminLayout>
+              <Admin />
+            </AdminLayout>
+          </AdminGuard>
         </AuthenticatedGuard>
       </Route>
       <Route path={path.notFound}>

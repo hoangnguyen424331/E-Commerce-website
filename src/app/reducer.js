@@ -5,6 +5,7 @@ import productReviewReducer from 'src/pages/ProductDetail/components/ProductRevi
 import cartReducer from 'src/pages/Cart/cart.slice'
 import bannersReducer from 'src/pages/Home/banners.slice'
 import authReducer from 'src/pages/Auth/auth.slice'
+import adminReducer from 'src/pages/Admin/admin.slice'
 
 const rootReducer = {
   products: productsReducer,
@@ -13,7 +14,8 @@ const rootReducer = {
   productReviews: productReviewReducer,
   cart: cartReducer,
   banners: bannersReducer,
-  auth: authReducer
+  auth: authReducer,
+  admin: adminReducer
 }
 
 export default rootReducer

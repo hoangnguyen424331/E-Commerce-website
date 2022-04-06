@@ -6,6 +6,9 @@ const authApi = {
   },
   login(userId) {
     return http.get('users', `?id=${userId}`)
+  },
+  fetchAllUsers(config) {
+    return http.get('users', config)
   }
 }
 

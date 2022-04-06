@@ -156,6 +156,7 @@
         }
 
         &-item {
+            @include transition;
             padding: 1rem;
 
             &:hover {
@@ -173,7 +174,10 @@
                 flex: 1;
                 text-align: start;
                 color: $text-color;
-                cursor: text;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-clamp: 1;
             }
 
             .price {
