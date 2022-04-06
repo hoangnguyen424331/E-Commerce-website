@@ -17,6 +17,7 @@ const useAuth = () => {
   const history = useHistory()
   const [error, setError] = useState(null)
   const authenticated = useSelector(state => Boolean(state.auth.profile.id))
+  const { role: userRole } = useSelector(state => state.auth.profile)
 
   const registerWithEmailAndPassword = async data => {
     const { firstName, lastName, email, password } = data
@@ -42,6 +43,7 @@ const useAuth = () => {
           displayName,
           photoURL,
           role: 'user',
+          status: 1,
           firstName,
           lastName,
           email
@@ -103,6 +105,7 @@ const useAuth = () => {
 
   return {
     authenticated,
+    userRole,
     registerWithEmailAndPassword,
     loginWithEmailAndPassword,
     logout,
