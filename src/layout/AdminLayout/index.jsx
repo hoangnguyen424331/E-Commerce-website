@@ -1,7 +1,21 @@
 import React from 'react'
+import Footer from '../Footer'
+import PropTypes from 'prop-types'
 
-function adminLayout() {
-  return <div>index</div>
+AdminLayout.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element)
+  ])
 }
 
-export default adminLayout
+function AdminLayout({ children }) {
+  return (
+    <div>
+      {children}
+      <Footer />
+    </div>
+  )
+}
+
+export default AdminLayout
